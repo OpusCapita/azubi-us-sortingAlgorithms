@@ -14,15 +14,17 @@ function bubblesort(array)
   {
     for (var i = array.length-1; i > 0; i--)
     {
-      var leftElement = array[i-1]
-      var rightElement = array[i]
+      let leftElement = array[i-1]
+      let rightElement = array[i]
 
-        if(leftElement > rightElement)
-        {
-          var temp = leftElement;
-          leftElement = rightElement;
-          rightElement = temp;
-        }
+      if(leftElement > rightElement)
+      {
+        let temp = leftElement;
+        leftElement = rightElement;
+        rightElement = temp;
+        array[i-1] = leftElement;
+        array[i] = rightElement;
+      }
     }
   }
   return array;
@@ -101,7 +103,7 @@ function gnomesort(array)
         goRight()
       }
     }
-    isGnomeOnTheRight = (indexOfRight >= array.length)
+    isGnomeOnTheRight = (indexOfRight >= array.length-1)
   }
   return array;
 }
