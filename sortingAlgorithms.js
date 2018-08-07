@@ -112,9 +112,13 @@ function swapPositions(array, firstIndex, secondIndex)
   array[secondIndex] = temp;
 }
 
-function simpleSort(array, testFunction) {
+function simpleSort(array, testFunction=0) {
+  if(testFunction==0)
+  {
   array.sort();
   return array;
+  }
+  else{testFunction(array)}
 }
 
 module.exports.selectionsort = selectionsort;

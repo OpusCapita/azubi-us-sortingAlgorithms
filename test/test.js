@@ -1,16 +1,19 @@
 var selectionsort = require("../sortingAlgorithms").selectionsort
 var gnomesort = require("../sortingAlgorithms").gnomesort
 var bubblesort = require("../sortingAlgorithms").bubblesort
+var simpleSort = require("../sortingAlgorithms").simpleSort
 var expect = require('chai').expect
 var assert = require('assert');
+
 describe('Array', function() {
   describe('sort()', function() {
-    it('should return undefined when no value is present',
+    it('should pass if the array is not undefined',
     function(){
-      expect(undefined).to.be.undefined;
+      myArray = [1]
+      expect(myArray).not.to.be.undefined;
     });
 
-    it('Compare sorted arrays for equality',
+    it('should compare sorted arrays for equality',
     function(){
       var myArray = [1];
 
@@ -20,17 +23,17 @@ describe('Array', function() {
       expect(myFinalArray).to.deep.equal(mySortedComparison);
     });
 
-    it('Compare sorted arrays for equality',
+    it('should compare sorted arrays for equality',
     function(){
       compareSortedArray([1,2,3,4,5,6,7,8,9,10], selectionsort);
     });
 
-    it('Compare sorted arrays for equality',
+    it('should compare sorted arrays for equality',
     function(){
       compareSortedArray([10,9,8,7,5,4,3,2,1], selectionsort);
     });
 
-    it('Compare sorted arrays for equality',
+    it('should compare sorted arrays for equality',
     function(){
       compareSortedArray([43, 65, 37, 51, 80, 76, 88, 14, 83, 27, 76, 75, 0,
         69, 40, 68, 31, 63, 1, 69, 18, 6, 78, 95, 59, 23, 53, 43, 80, 29,
@@ -41,7 +44,7 @@ describe('Array', function() {
         1, 43], bubblesort);
     });
 
-    it('Compare sorted arrays for equality',
+    it('should compare sorted arrays for equality',
     function(){
       compareSortedArray([79, 67, 4, 91, 60, 61, 93, 24, 99, 78, 72, 62, 7,
         92, 74, 81, 92, 54, 74, 1, 77, 52, 12, 44, 1, 2, 96, 28, 39,
@@ -52,7 +55,7 @@ describe('Array', function() {
         17, 45, 54, 66, 70, 84, 44], selectionsort);
     });
 
-    it('Compare sorted arrays for equality',
+    it('should compare sorted arrays for equality',
     function(){
       compareSortedArray([671, 384, 458, 981, 184, 10, 258, 212, 345, 239, 971, 355,
       713, 448, 378, 961, 111, 162, 613, 45, 647, 31, 948, 608,
@@ -64,8 +67,77 @@ describe('Array', function() {
       525, 203, 270, 334, 501, 758, 597, 826, 859, 35, 432, 914,
       770, 673, 729, 304], bubblesort);
     });
+
+    it('should compare sorted arrays for equality, reversed array',
+    function(){
+      var myArray = [1,3,2,5,9]
+      var myComparison = myArray.slice(0);
+
+      var mySortedComparison = myComparison.sort(function(a,b){return b-a});
+      var myFinalArray = simpleSort(myArray, function(a,b){
+        if (b > a) {
+          return 1
+        } else if (b < a) {
+          return -1
+        }
+        return 0;
+      });
+      expect(myFinalArray).to.deep.equal(mySortedComparison);
+    });
   });
 });
+
+    it('should compare if arrays are equally sorted with given sorting-function a-b',
+    function(){
+      var myArray = [1,3,2,5,9]
+      var myComparison = myArray.slice(0);
+
+      var compare = function(a,b){return a-b}
+      var mySortedComparison = myComparison.sort(compare);
+      var myFinalArray = simpleSort(myArray,compare)
+
+      expect(myFinalArray).to.deep.equal(mySortedComparison);
+    });
+
+
+    it('should compare if arrays are equally sorted with given sorting-function',
+    function(){
+      var myArray = [1,3,2,5,9]
+      var myComparison = myArray.slice(0);
+
+      var compare = function(a,b) {
+        if (b > a) {
+          return 1
+        } else if (b < a) {
+          return -1
+        }
+        return 0;
+      }
+      var mySortedComparison = myComparison.sort(compare);
+      var myFinalArray = simpleSort(myArray,compare);
+
+      expect(myFinalArray).to.deep.equal(mySortedComparison);
+    });
+
+    it('sort by type, sort only numbers, not strings',
+    function(){
+      var myArray = [2,1,5,"myString",6,"myOtherString",-1]
+      var myComparison = myArray.slice(0);
+
+        var compare = function(a,b){
+        if (typeof a === "string") {
+          return -1
+        }
+        if (typeof b === "string") {
+          return 1
+        }
+        return b - a;
+      };
+      var mySortedComparison = myComparison.sort(compare);
+      var myFinalArray = simpleSort(myArray,compare);
+
+      expect(myFinalArray).to.deep.equal(mySortedComparison);
+    });
 
 function compareSortedArray(myArray, sortAlgortihm){
   var myComparison = myArray.slice(0);
