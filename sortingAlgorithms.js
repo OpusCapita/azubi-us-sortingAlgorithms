@@ -8,7 +8,7 @@
 // [2][1][5]
 // [1][2][5]
 
-function bubblesort(array)
+function bubblesort(array, testFunction)
 {
   for(var j = 0; array.length > j; j++)
   {
@@ -29,8 +29,6 @@ function bubblesort(array)
   }
   return array;
 }
-//console.log(bubblesort([2,5,1]));
-//console.log(bubblesort([7,1,4,2,8]));
 //console.log(bubblesort([43, 65, 37, 51, 80, 76, 88, 14, 83, 27, 76, 75]));
 
 
@@ -41,7 +39,7 @@ function bubblesort(array)
 //[8][3][5]
 //[3][8][5]
 //[3][5][8]
-function selectionsort(array)
+function selectionsort(array, testFunction)
 {
   for(var i = 0; i < array.length; i++)
   {
@@ -57,8 +55,6 @@ function selectionsort(array)
   }
   return array;
 }
-//console.log(selectionsort([8,3,5]));
-//console.log(selectionsort([7,1,4,2,8]));
 //console.log(selectionsort([43, 65, 37, 51, 80, 76, 88, 14, 83, 27, 76, 75]));
 
 
@@ -75,7 +71,7 @@ function selectionsort(array)
 // compare to.
 
 
-function gnomesort(array)
+function gnomesort(array, testFunction)
 {
   var i = 1;
   var isGnomeOnTheRight = false;
@@ -107,8 +103,6 @@ function gnomesort(array)
   }
   return array;
 }
-//console.log(gnomesort([8,3,5]));
-//console.log(gnomesort([7,1,4,2,8]));
 //console.log(gnomesort([43, 65, 37, 51, 80, 76, 88, 14, 83, 27, 76, 75]));
 
 function swapPositions(array, firstIndex, secondIndex)
@@ -118,10 +112,12 @@ function swapPositions(array, firstIndex, secondIndex)
   array[secondIndex] = temp;
 }
 
-function sort(array) {
+function simpleSort(array, testFunction) {
   array.sort();
+  return array;
 }
 
 module.exports.selectionsort = selectionsort;
 module.exports.gnomesort = gnomesort;
 module.exports.bubblesort = bubblesort;
+module.exports.simpleSort = simpleSort;
