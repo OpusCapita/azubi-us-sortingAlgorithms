@@ -1,0 +1,29 @@
+var selectionsort = require("../sortingAlgorithms").selectionsort
+//var gnomesort = require("../sortingAlgorithms").gnomesort
+//var bubblesort = require("../sortingAlgorithms").bubblesort
+var expect = require('chai').expect
+var assert = require('assert');
+describe('Array', function() {
+  describe('sort()', function() {
+    it('should sort the array or return undefined when no value is present', function(){
+      var myArray =
+      [671, 384, 458, 981, 184, 10, 258, 212, 345, 239, 971, 355,
+      713, 448, 378, 961, 111, 162, 613, 45, 647, 31, 948, 608,
+      477, 31, 642, 531, 58, 415, 523, 144, 113, 261, 936, 566,
+      418, 557, 36, 672, 398, 592, 102, 249, 965, 68, 747, 280,
+      12, 919, 998, 277, 686, 441, 182, 406, 28, 129, 775, 899,
+      456, 447, 868, 449, 564, 364, 462, 508, 740, 135, 636, 881,
+      165, 918, 947, 623, 125, 227, 571, 264, 613, 302, 536, 904,
+      525, 203, 270, 334, 501, 758, 597, 826, 859, 35, 432, 914,
+      770, 673, 729, 304]
+
+      var myComparison = myArray.slice(0);
+      var mySortedComparison = myComparison.sort(function(a,b){return a-b});
+      var myFinalArray = selectionsort(myArray);
+      expect(myFinalArray).to.deep.equal(mySortedComparison);
+    });
+  });
+});
+
+
+//expect(undefined).to.be.undefined;
