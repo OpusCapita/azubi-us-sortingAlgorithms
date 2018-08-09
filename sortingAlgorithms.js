@@ -10,26 +10,32 @@
 
 function bubblesort(array, testFunction)
 {
-  for(var j = 0; array.length > j; j++)
-  {
-    for (var i = array.length-1; i > 0; i--)
+    if(!testFunction)
     {
-      let leftElement = array[i-1]
-      let rightElement = array[i]
-
-      if(leftElement > rightElement)
+      testFunction = function (a,b)
       {
-        let temp = leftElement;
-        leftElement = rightElement;
-        rightElement = temp;
-        array[i-1] = leftElement;
-        array[i] = rightElement;
+        return a-b;
       }
     }
-  }
-  return array;
+    for(var j = 0; array.length > j; j++)
+    {
+      for (var i = array.length-1; i > 0; i--)
+      {
+        let leftElement = array[i-1]
+        let rightElement = array[i]
+
+        if(testFunction(leftElement, rightElement) > 0)
+        {
+          let temp = leftElement;
+          leftElement = rightElement;
+          rightElement = temp;
+          array[i-1] = leftElement;
+          array[i] = rightElement;
+        }
+      }
+    }
+    return array;
 }
-//console.log(bubblesort([43, 65, 37, 51, 80, 76, 88, 14, 83, 27, 76, 75]));
 
 
 //Selection Sort
@@ -41,12 +47,20 @@ function bubblesort(array, testFunction)
 //[3][5][8]
 function selectionsort(array, testFunction)
 {
+  // if(!testFunction)
+  // {
+  //   testFunction = function (a,b)
+  //   {
+  //     return a-b;
+  //   }
+  // }
   for(var i = 0; i < array.length; i++)
   {
     var smallestElementIndex = i;
     for (var j = i+1; j < array.length; j++)
     {
       if(array[j]<array[smallestElementIndex])
+      //if(testFunction(array[j], array[smallestElementIndex]))
       {
         smallestElementIndex = j;
       }
@@ -55,8 +69,6 @@ function selectionsort(array, testFunction)
   }
   return array;
 }
-//console.log(selectionsort([43, 65, 37, 51, 80, 76, 88, 14, 83, 27, 76, 75]));
-
 
 
 //Gnome Sort
@@ -64,6 +76,7 @@ function selectionsort(array, testFunction)
 // at the left.
 // If he sees that the two items in front of him are sorted, he makes a
 // step to the right.
+
 // If he sees that the two items in front of him are not sorted, he swaps
 // them and makes a step to the left.
 // If he can't go further to the left, he goes one step to the right.
@@ -71,39 +84,61 @@ function selectionsort(array, testFunction)
 // compare to.
 
 
-function gnomesort(array, testFunction)
+function gnomesort(array, gnomeComparesElements)
 {
-  var i = 1;
-  var isGnomeOnTheRight = false;
-  while(!isGnomeOnTheRight)
-  {
-    function goLeft() {
-      i--
-    }
-    function goRight() {
-      i++
-    }
-    var indexOfLeft = i-1
-    var indexOfRight = i
-    var leftElement = array[indexOfLeft]
-    var rightElement = array[indexOfRight]
+  var positionOfGnome = 1;
 
-    if(leftElement <= rightElement)
+  function moveGnomeToLeft() {
+    positionOfGnome--
+  }
+  function moveGnomeToRight() {
+    positionOfGnome++
+  }
+  function isGnomeOnTheLeft() {
+    return positionOfGnome === 1
+  }
+  function isGnomeOnTheRight() {
+    return positionOfGnome >= array.length
+  }
+  function getElementLeftOfGnome() {
+    return array[positionOfGnome-1]
+  }
+  function getRightElementOfGnome() {
+
+    return array[positionOfGnome]
+  }
+  if (!gnomeComparesElements) {
+      gnomeComparesElements = function(a,b) {
+        return (b >= a)
+      }
+  }
+
+  function gnomeSwitchesElements() {
+        var indexOfLeft = positionOfGnome-1
+        var indexOfRight = positionOfGnome
+        swapPositions(array, indexOfLeft, indexOfRight);
+  }
+
+  while(!isGnomeOnTheRight())
+  {
+    var leftElement = getElementLeftOfGnome()
+    var rightElement = getRightElementOfGnome()
+
+    if(gnomeComparesElements(leftElement, rightElement))
     {
-      goRight()
+      moveGnomeToRight()
     } else {
-      swapPositions(array, indexOfLeft, indexOfRight);
-      goLeft()
-      if(i==0)
-      {
-        goRight()
+      gnomeSwitchesElements()
+
+      if(isGnomeOnTheLeft()) {
+        moveGnomeToRight()
+      } else {
+        moveGnomeToLeft()
       }
     }
-    isGnomeOnTheRight = (indexOfRight >= array.length-1)
   }
   return array;
 }
-//console.log(gnomesort([43, 65, 37, 51, 80, 76, 88, 14, 83, 27, 76, 75]));
 
 function swapPositions(array, firstIndex, secondIndex)
 {
@@ -112,16 +147,7 @@ function swapPositions(array, firstIndex, secondIndex)
   array[secondIndex] = temp;
 }
 
-function simpleSort(array, testFunction=0) {
-  if(testFunction==0)
-  {
-  array.sort();
-  return array;
-  }
-  else{testFunction(array)}
-}
 
 module.exports.selectionsort = selectionsort;
 module.exports.gnomesort = gnomesort;
 module.exports.bubblesort = bubblesort;
-module.exports.simpleSort = simpleSort;
