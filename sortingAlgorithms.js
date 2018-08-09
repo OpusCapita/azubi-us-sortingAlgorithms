@@ -37,7 +37,6 @@ function bubblesort(array, testFunction)
     return array;
 }
 
-
 //Selection Sort
 // Go through all elements of the input array to find the smallest one.
 // Swap this item to be on the far left. Proceed like this with the rest
@@ -47,20 +46,19 @@ function bubblesort(array, testFunction)
 //[3][5][8]
 function selectionsort(array, testFunction)
 {
-  // if(!testFunction)
-  // {
-  //   testFunction = function (a,b)
-  //   {
-  //     return a-b;
-  //   }
-  // }
+  if(!testFunction)
+  {
+    testFunction = function (a,b)
+    {
+      return a-b;
+    }
+  }
   for(var i = 0; i < array.length; i++)
   {
     var smallestElementIndex = i;
     for (var j = i+1; j < array.length; j++)
     {
-      if(array[j]<array[smallestElementIndex])
-      //if(testFunction(array[j], array[smallestElementIndex]))
+      if(testFunction(array[smallestElementIndex], array[j], ) >0)
       {
         smallestElementIndex = j;
       }
@@ -124,7 +122,7 @@ function gnomesort(array, gnomeComparesElements)
     var leftElement = getElementLeftOfGnome()
     var rightElement = getRightElementOfGnome()
 
-    if(gnomeComparesElements(leftElement, rightElement))
+    if(gnomeComparesElements(leftElement, rightElement) )
     {
       moveGnomeToRight()
     } else {
@@ -139,6 +137,11 @@ function gnomesort(array, gnomeComparesElements)
   }
   return array;
 }
+
+// [2,1,5,"myString",6,"myOtherString",-1]
+// Expected = [ 'myString', 'myOtherString', 6, 5, 2, 1, -1 ]
+// Actual   =
+
 
 function swapPositions(array, firstIndex, secondIndex)
 {
