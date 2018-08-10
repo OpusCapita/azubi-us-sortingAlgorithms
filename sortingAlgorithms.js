@@ -1,4 +1,4 @@
-//Bubblesort
+// Bubblesort
 // Start on the right of the array. Compare two items. Make the items
 // switch places if the left one is bigger than the right one. Proceed
 // one step. Repeat until at the end of array: the smallest element is
@@ -8,58 +8,46 @@
 // [2][1][5]
 // [1][2][5]
 
-function bubblesort(array, testFunction)
-{
-    if(!testFunction)
-    {
-      testFunction = function (a,b)
-      {
-        return a-b;
-      }
-    }
-    for(let j = 0; array.length > j; j++)
-    {
-      for (let i = array.length-1; i > 0; i--)
-      {
-        let leftElement = array[i-1]
-        let rightElement = array[i]
+function bubblesort(array, testFunction) {
+  if (!testFunction) {
+    testFunction = function (a, b) {
+      return a - b;
+    };
+  }
+  for (let j = 0; array.length > j; j++) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let leftElement = array[i - 1];
+      let rightElement = array[i];
 
-        if(testFunction(leftElement, rightElement) > 0)
-        {
-          let temp = leftElement;
-          leftElement = rightElement;
-          rightElement = temp;
-          array[i-1] = leftElement;
-          array[i] = rightElement;
-        }
+      if (testFunction(leftElement, rightElement) > 0) {
+        const temp = leftElement;
+        leftElement = rightElement;
+        rightElement = temp;
+        array[i - 1] = leftElement;
+        array[i] = rightElement;
       }
     }
-    return array;
+  }
+  return array;
 }
 
-//Selection Sort
+// Selection Sort
 // Go through all elements of the input array to find the smallest one.
 // Swap this item to be on the far left. Proceed like this with the rest
 // of the array.
-//[8][3][5]
-//[3][8][5]
-//[3][5][8]
-function selectionsort(array, testFunction)
-{
-  if(!testFunction)
-  {
-    testFunction = function (a,b)
-    {
-      return a-b;
-    }
+// [8][3][5]
+// [3][8][5]
+// [3][5][8]
+function selectionsort(array, testFunction) {
+  if (!testFunction) {
+    testFunction = function (a, b) {
+      return a - b;
+    };
   }
-  for(let i = 0; i < array.length; i++)
-  {
+  for (let i = 0; i < array.length; i++) {
     let smallestElementIndex = i;
-    for (let j = i+1; j < array.length; j++)
-    {
-      if(testFunction(array[smallestElementIndex], array[j], ) >0)
-      {
+    for (let j = i + 1; j < array.length; j++) {
+      if (testFunction(array[smallestElementIndex], array[j]) > 0) {
         smallestElementIndex = j;
       }
     }
@@ -69,7 +57,7 @@ function selectionsort(array, testFunction)
 }
 
 
-//Gnome Sort
+// Gnome Sort
 // Suppose you have a gnome who wants to sort your array. He starts
 // at the left.
 // If he sees that the two items in front of him are sorted, he makes a
@@ -82,56 +70,52 @@ function selectionsort(array, testFunction)
 // compare to.
 
 
-function gnomesort(array, gnomeComparesElements)
-{
+function gnomesort(array, gnomeComparesElements) {
   let positionOfGnome = 1;
 
   function moveGnomeToLeft() {
-    positionOfGnome--
+    positionOfGnome--;
   }
   function moveGnomeToRight() {
-    positionOfGnome++
+    positionOfGnome++;
   }
   function isGnomeOnTheLeft() {
-    return positionOfGnome === 1
+    return positionOfGnome === 1;
   }
   function isGnomeOnTheRight() {
-    return positionOfGnome >= array.length
+    return positionOfGnome >= array.length;
   }
   function getElementLeftOfGnome() {
-    return array[positionOfGnome-1]
+    return array[positionOfGnome - 1];
   }
   function getRightElementOfGnome() {
-
-    return array[positionOfGnome]
+    return array[positionOfGnome];
   }
   if (!gnomeComparesElements) {
-      gnomeComparesElements = function(a,b) {
-        return a-b
-      }
+    gnomeComparesElements = function (a, b) {
+      return a - b;
+    };
   }
 
   function gnomeSwitchesElements() {
-        let indexOfLeft = positionOfGnome-1
-        let indexOfRight = positionOfGnome
-        swapPositions(array, indexOfLeft, indexOfRight);
+    const indexOfLeft = positionOfGnome - 1;
+    const indexOfRight = positionOfGnome;
+    swapPositions(array, indexOfLeft, indexOfRight);
   }
 
-  while(!isGnomeOnTheRight())
-  {
-    let leftElement = getElementLeftOfGnome()
-    let rightElement = getRightElementOfGnome()
+  while (!isGnomeOnTheRight()) {
+    const leftElement = getElementLeftOfGnome();
+    const rightElement = getRightElementOfGnome();
 
-    if(gnomeComparesElements(leftElement, rightElement) <=0)
-    {
-      moveGnomeToRight()
+    if (gnomeComparesElements(leftElement, rightElement) <= 0) {
+      moveGnomeToRight();
     } else {
-      gnomeSwitchesElements()
+      gnomeSwitchesElements();
 
-      if(isGnomeOnTheLeft()) {
-        moveGnomeToRight()
+      if (isGnomeOnTheLeft()) {
+        moveGnomeToRight();
       } else {
-        moveGnomeToLeft()
+        moveGnomeToLeft();
       }
     }
   }
@@ -139,13 +123,11 @@ function gnomesort(array, gnomeComparesElements)
 }
 
 
-function swapPositions(array, firstIndex, secondIndex)
-{
-  let temp = array[firstIndex];
+function swapPositions(array, firstIndex, secondIndex) {
+  const temp = array[firstIndex];
   array[firstIndex] = array[secondIndex];
   array[secondIndex] = temp;
 }
-
 
 module.exports.selectionsort = selectionsort;
 module.exports.gnomesort = gnomesort;

@@ -1,3 +1,4 @@
+/* eslint-disable */
 var selectionsort = require("../sortingAlgorithms").selectionsort
 var gnomesort = require("../sortingAlgorithms").gnomesort
 var bubblesort = require("../sortingAlgorithms").bubblesort
