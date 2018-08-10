@@ -17,9 +17,9 @@ function bubblesort(array, testFunction)
         return a-b;
       }
     }
-    for(var j = 0; array.length > j; j++)
+    for(let j = 0; array.length > j; j++)
     {
-      for (var i = array.length-1; i > 0; i--)
+      for (let i = array.length-1; i > 0; i--)
       {
         let leftElement = array[i-1]
         let rightElement = array[i]
@@ -53,10 +53,10 @@ function selectionsort(array, testFunction)
       return a-b;
     }
   }
-  for(var i = 0; i < array.length; i++)
+  for(let i = 0; i < array.length; i++)
   {
-    var smallestElementIndex = i;
-    for (var j = i+1; j < array.length; j++)
+    let smallestElementIndex = i;
+    for (let j = i+1; j < array.length; j++)
     {
       if(testFunction(array[smallestElementIndex], array[j], ) >0)
       {
@@ -84,7 +84,7 @@ function selectionsort(array, testFunction)
 
 function gnomesort(array, gnomeComparesElements)
 {
-  var positionOfGnome = 1;
+  let positionOfGnome = 1;
 
   function moveGnomeToLeft() {
     positionOfGnome--
@@ -107,22 +107,22 @@ function gnomesort(array, gnomeComparesElements)
   }
   if (!gnomeComparesElements) {
       gnomeComparesElements = function(a,b) {
-        return (b >= a)
+        return a-b
       }
   }
 
   function gnomeSwitchesElements() {
-        var indexOfLeft = positionOfGnome-1
-        var indexOfRight = positionOfGnome
+        let indexOfLeft = positionOfGnome-1
+        let indexOfRight = positionOfGnome
         swapPositions(array, indexOfLeft, indexOfRight);
   }
 
   while(!isGnomeOnTheRight())
   {
-    var leftElement = getElementLeftOfGnome()
-    var rightElement = getRightElementOfGnome()
+    let leftElement = getElementLeftOfGnome()
+    let rightElement = getRightElementOfGnome()
 
-    if(gnomeComparesElements(leftElement, rightElement) )
+    if(gnomeComparesElements(leftElement, rightElement) <=0)
     {
       moveGnomeToRight()
     } else {
@@ -138,14 +138,10 @@ function gnomesort(array, gnomeComparesElements)
   return array;
 }
 
-// [2,1,5,"myString",6,"myOtherString",-1]
-// Expected = [ 'myString', 'myOtherString', 6, 5, 2, 1, -1 ]
-// Actual   =
-
 
 function swapPositions(array, firstIndex, secondIndex)
 {
-  var temp = array[firstIndex];
+  let temp = array[firstIndex];
   array[firstIndex] = array[secondIndex];
   array[secondIndex] = temp;
 }
