@@ -106,7 +106,7 @@ describe('Array', function() {
     })
 })
 
-describe('Selectionsort', function(){
+describe('SelectionSort', function(){
   it('Accepts an array', function(){compareSortedArray([1], selectionsort)})
   it('Checks if given array is sorted', function(){compareSortedArray([1,2,3,4,5,6,7,8,9,10], selectionsort)})
   it('Sorts the array ascending', function(){
@@ -135,7 +135,7 @@ describe('Selectionsort', function(){
     })
     expect(myFinalArray).to.deep.equal(mySortedComparison)
     })
-    it('Selectionsort sorts an array according the given function a-b',
+    it('SelectionSort sorts an array according the given function a-b',
       function(){
         var myArray = [1,3,2,5,9]
         var myComparison = myArray.slice(0);
@@ -205,7 +205,7 @@ describe('Selectionsort', function(){
       })
 })
 
-describe('Gnomensort', function(){
+describe('GnomeSort', function(){
     it('Accepts an array', function(){compareSortedArray([1], gnomesort)})
     it('Checks if given array is sorted', function(){compareSortedArray([1,2,3,4,5,6,7,8,9,10], gnomesort)})
     it('Sorts the array ascending', function(){
