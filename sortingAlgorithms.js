@@ -9,28 +9,27 @@
 // [1][2][5]
 
 function bubblesort(array, testFunction) {
-  const myArray = array;
-  // let OptionalTestFunction = testFunction;
+  const ArrayToSort = array;
   if (!testFunction) {
-    testFunction = function regularSort(a, b) { // TypeError: testFunction is not a function
+    testFunction = function regularSort(a, b) {
       return a - b;
     };
   }
-  for (let j = 0; myArray.length > j; j++) {
-    for (let i = myArray.length - 1; i > 0; i--) {
-      let leftElement = myArray[i - 1];
-      let rightElement = myArray[i];
+  for (let j = 0; ArrayToSort.length > j; j++) {
+    for (let i = ArrayToSort.length - 1; i > 0; i--) {
+      let leftElement = ArrayToSort[i - 1];
+      let rightElement = ArrayToSort[i];
 
       if (testFunction(leftElement, rightElement) > 0) {
         const temp = leftElement;
         leftElement = rightElement;
         rightElement = temp;
-        myArray[i - 1] = leftElement;
-        myArray[i] = rightElement;
+        ArrayToSort[i - 1] = leftElement;
+        ArrayToSort[i] = rightElement;
       }
     }
   }
-  return myArray;
+  return ArrayToSort;
 }
 
 // Selection Sort
@@ -41,9 +40,8 @@ function bubblesort(array, testFunction) {
 // [3][8][5]
 // [3][5][8]
 function selectionsort(array, testFunction) {
-  // let OptionalTestFunction = testFunction;
   if (!testFunction) {
-    testFunction = function regularSort(a, b) { // TypeError: testFunction is not a function
+    testFunction = function regularSort(a, b) {
       return a - b;
     };
   }
