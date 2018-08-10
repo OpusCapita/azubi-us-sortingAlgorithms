@@ -9,26 +9,28 @@
 // [1][2][5]
 
 function bubblesort(array, testFunction) {
+  const myArray = array;
+  // let OptionalTestFunction = testFunction;
   if (!testFunction) {
-    testFunction = function (a, b) {
+    testFunction = function regularSort(a, b) { // TypeError: testFunction is not a function
       return a - b;
     };
   }
-  for (let j = 0; array.length > j; j++) {
-    for (let i = array.length - 1; i > 0; i--) {
-      let leftElement = array[i - 1];
-      let rightElement = array[i];
+  for (let j = 0; myArray.length > j; j++) {
+    for (let i = myArray.length - 1; i > 0; i--) {
+      let leftElement = myArray[i - 1];
+      let rightElement = myArray[i];
 
       if (testFunction(leftElement, rightElement) > 0) {
         const temp = leftElement;
         leftElement = rightElement;
         rightElement = temp;
-        array[i - 1] = leftElement;
-        array[i] = rightElement;
+        myArray[i - 1] = leftElement;
+        myArray[i] = rightElement;
       }
     }
   }
-  return array;
+  return myArray;
 }
 
 // Selection Sort
@@ -39,8 +41,9 @@ function bubblesort(array, testFunction) {
 // [3][8][5]
 // [3][5][8]
 function selectionsort(array, testFunction) {
+  // let OptionalTestFunction = testFunction;
   if (!testFunction) {
-    testFunction = function (a, b) {
+    testFunction = function regularSort(a, b) { // TypeError: testFunction is not a function
       return a - b;
     };
   }
@@ -70,7 +73,8 @@ function selectionsort(array, testFunction) {
 // compare to.
 
 
-function gnomesort(array, gnomeComparesElements) {
+function gnomesort(array, testFunction) {
+  let gnomeComparesElements = testFunction;
   let positionOfGnome = 1;
 
   function moveGnomeToLeft() {
@@ -92,7 +96,7 @@ function gnomesort(array, gnomeComparesElements) {
     return array[positionOfGnome];
   }
   if (!gnomeComparesElements) {
-    gnomeComparesElements = function (a, b) {
+    gnomeComparesElements = function regularSort(a, b) {
       return a - b;
     };
   }
@@ -124,9 +128,10 @@ function gnomesort(array, gnomeComparesElements) {
 
 
 function swapPositions(array, firstIndex, secondIndex) {
-  const temp = array[firstIndex];
-  array[firstIndex] = array[secondIndex];
-  array[secondIndex] = temp;
+  const myArray = array;
+  const temp = myArray[firstIndex];
+  myArray[firstIndex] = myArray[secondIndex];
+  myArray[secondIndex] = temp;
 }
 
 module.exports.selectionsort = selectionsort;
