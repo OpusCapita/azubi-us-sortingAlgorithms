@@ -17,15 +17,17 @@ function bubblesort(array, testFunction) {
   }
   for (let j = 0; ArrayToSort.length > j; j++) {
     for (let i = ArrayToSort.length - 1; i > 0; i--) {
-      let leftElement = ArrayToSort[i - 1];
-      let rightElement = ArrayToSort[i];
+      const indexPosition = i;
+      const leftFromIndexPosition = i - 1;
+      let leftElement = ArrayToSort[leftFromIndexPosition];
+      let rightElement = ArrayToSort[indexPosition];
 
       if (testFunction(leftElement, rightElement) > 0) {
         const temp = leftElement;
         leftElement = rightElement;
         rightElement = temp;
-        ArrayToSort[i - 1] = leftElement;
-        ArrayToSort[i] = rightElement;
+        ArrayToSort[leftFromIndexPosition] = leftElement;
+        ArrayToSort[indexPosition] = rightElement;
       }
     }
   }
